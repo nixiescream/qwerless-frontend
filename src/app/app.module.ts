@@ -16,6 +16,7 @@ import { RequireUserGuard } from './guards/require-user.guard';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 const routes: Routes = [
     { path: '',  component: HomePageComponent, canActivate: [ InitAuthGuard ] },
@@ -32,7 +33,8 @@ const routes: Routes = [
     SignupPageComponent,
     LoginComponent,
     SignupComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

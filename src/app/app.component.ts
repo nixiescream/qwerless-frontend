@@ -1,8 +1,5 @@
-import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild,  ElementRef, ViewEncapsulation } from '@angular/core';
 // import * as MyScriptJS from 'myscript';
-
-import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,24 +8,13 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  loading = true;
-  anon: boolean;
-  user: any;
+
 //   @ViewChild("tref", {read: ElementRef}) domEditor: ElementRef;
 //   editor;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor() {}
 
   ngOnInit() {
-    this.authService.userChange$.subscribe((user) => {
-      this.loading = false;
-      this.user = user;
-      this.anon = !user;
-    });
-
     // // your code
     // console.log(this.domEditor.nativeElement);
     // this.editor = MyScriptJS.register(this.domEditor.nativeElement, {
@@ -44,10 +30,5 @@ export class AppComponent implements OnInit {
     //         },
     //     },
     // });
-  }
-
-  logout() {
-    this.authService.logout()
-      .then(() => this.router.navigate(['/login']));
   }
 }

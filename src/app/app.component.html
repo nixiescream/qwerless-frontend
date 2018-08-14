@@ -1,17 +1,4 @@
-<h1>Qwerless</h1>
-<div [ngClass]="{'is-user': user, 'is-anon': anon}">
-    <div *ngIf="loading">
-        <span class="username text">loading...</span>
-    </div>
-    <div *ngIf="!loading && !!user">
-        <a [routerLink]="['/profile']">{{user.username}}</a>
-        <a (click)="logout()">logout</a>
-    </div>
-    <div *ngIf="!loading && anon">
-        <a [routerLink]="['/login']">login</a>
-        <a [routerLink]="['/signup']">signup</a>
-    </div>
-</div>
+<app-navbar></app-navbar>
 <router-outlet></router-outlet>
 <!-- <div id="editor" #tref>
 

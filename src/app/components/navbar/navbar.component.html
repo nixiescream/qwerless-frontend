@@ -1,0 +1,68 @@
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+    <nav class="uk-navbar uk-navbar-container uk-hidden@m" id="menu" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" [routerLink]="['/']">Qwerless</a> 
+        </div>    
+        <div class="uk-navbar-right">
+            <a class="uk-navbar-toggle" href="#" uk-toggle="target: #offcanvas-nav">
+                <span uk-navbar-toggle-icon></span>
+            </a>
+        </div>
+    </nav>
+    </div>
+    <div id="offcanvas-nav" uk-offcanvas="overlay: true; flip: true">
+        <div class="uk-offcanvas-bar">
+            <ul class="uk-nav uk-nav-default">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <div [ngClass]="{'is-user': user, 'is-anon': anon}">
+                    <div *ngIf="!loading && !!user">
+                        <ul class="uk-nav">
+                            <li><a [routerLink]="['/']">Home</a></li>
+                            <li><a [routerLink]="['/profile']">{{user.username}}</a></li>
+                            <!-- <li><a href="/users/edit/{{currentUser._id}}">Edit profile</a></li>
+                            <li><a href="/jobs/create">Create a job</a></li>
+                            <li><a href="/jobs">My jobs</a></li> -->
+                            <li class="uk-nav-divider"></li>
+                            <li><a (click)="logout()">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div *ngIf="!loading && anon">
+                        <ul class="uk-nav">
+                            <!-- <li><a href="/">Home</a></li> -->
+                            <li> <a [routerLink]="['/signup']">Signup</a> </li>
+                            <li> <a [routerLink]="['/login']">Login</a> </li>
+                        </ul>
+                    </div> 
+                </div>
+            </ul>
+        </div>
+    </div>
+    
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+    <nav class="uk-navbar uk-navbar-container uk-visible@m" id="menu" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" [routerLink]="['/']">Qwerless</a>         
+        </div>
+        <div class="uk-navbar-right" [ngClass]="{'is-user': user, 'is-anon': anon}">
+            <ul class="uk-navbar-nav">
+                    <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">
+                        <a href="#" id="menu-navbar">Menu</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a [routerLink]="['/']">Home</a></li>
+                                    <li><a [routerLink]="['/profile']">{{user.username}}</a></li>
+                                    <!-- <li><a href="/users/edit/{{currentUser._id}}">Edit profile</a></li>
+                                    <li><a href="/jobs/create">Create a job</a></li>
+                                    <li><a href="/jobs">My jobs</a></li> -->
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a (click)="logout()">Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a [routerLink]="['/signup']">Signup</a> </li>
+                    <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a [routerLink]="['/login']">Login</a> </li>
+            </ul>
+        </div>    
+    </nav>
+    </div>
+    

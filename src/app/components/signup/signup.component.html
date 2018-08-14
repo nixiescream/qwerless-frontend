@@ -3,6 +3,9 @@
     <div class="field" [ngClass]="{'has-error': feedbackEnabled && usernameField.errors}">
         <label>username</label>
         <input type="text" name="username" [(ngModel)]="username" #usernameField="ngModel" required />
+
+        <label>email</label>
+        <input type="text" name="email" [(ngModel)]="email" #emailField="ngModel" required />
   
         <label>password</label>
         <input type="password" name="password" [(ngModel)]="password" #passwordField="ngModel" required />

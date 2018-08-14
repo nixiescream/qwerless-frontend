@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 export class SignupComponent implements OnInit {
 
     username: string;
+    email: string;
     password: string;
     
     constructor( 
@@ -23,6 +24,7 @@ export class SignupComponent implements OnInit {
     submitForm(form) {
     this.authService.signup({
         username: this.username,
+        email: this.email,
         password: this.password
     })
     .then(()=> {

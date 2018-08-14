@@ -17,11 +17,13 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
     { path: '',  component: HomePageComponent, canActivate: [ InitAuthGuard ] },
     { path: 'login',  component: LoginPageComponent, canActivate: [ RequireAnonGuard ] },
     { path: 'signup',  component: SignupPageComponent, canActivate: [ RequireAnonGuard ] },
+    { path: 'profile',  component: ProfileComponent, canActivate: [ RequireUserGuard ] },
     { path: '**', component: NotFoundComponent } 
 ]
 
@@ -34,7 +36,8 @@ const routes: Routes = [
     LoginComponent,
     SignupComponent,
     NotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

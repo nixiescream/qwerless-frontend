@@ -1,11 +1,11 @@
 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
-    <nav class="uk-navbar uk-navbar-container uk-hidden@m" id="menu" uk-navbar>
+    <nav [ngClass]="{'uk-navbar-transparent':setClasses().homeClass}" class="uk-navbar uk-navbar-container uk-hidden@m" id="menu" uk-navbar>
         <div class="uk-navbar-left">
-            <a class="uk-navbar-item uk-logo" [routerLink]="['/']">Qwerless</a> 
+            <a class="uk-navbar-item uk-logo" [routerLink]="['/']"><span [ngClass]="{'uk-text-muted':setClasses().secondClass}">Qwert<span class="sufix">less</span></span></a> 
         </div>    
         <div class="uk-navbar-right">
             <a class="uk-navbar-toggle" href="#" uk-toggle="target: #offcanvas-nav">
-                <span uk-navbar-toggle-icon></span>
+                <span [ngClass]="{'uk-text-muted':setClasses().secondClass}" uk-navbar-toggle-icon></span>
             </a>
         </div>
     </nav>
@@ -39,14 +39,14 @@
     </div>
     
     <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
-    <nav class="uk-navbar uk-navbar-container uk-visible@m" id="menu" uk-navbar>
+    <nav [ngClass]="{'uk-navbar-transparent':setClasses().homeClass}" class="uk-navbar uk-navbar-container uk-visible@m" id="menu" uk-navbar>
         <div class="uk-navbar-left">
-            <a class="uk-navbar-item uk-logo" [routerLink]="['/']">Qwerless</a>         
+            <a class="uk-navbar-item uk-logo" [routerLink]="['/']"><span [ngClass]="{'uk-text-muted':setClasses().secondClass}">Qwert<span class="sufix">less</span></span></a>         
         </div>
         <div class="uk-navbar-right" [ngClass]="{'is-user': user, 'is-anon': anon}">
             <ul class="uk-navbar-nav">
                     <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">
-                        <a href="#" id="menu-navbar">Menu</a>
+                        <a href="#" id="menu-navbar" [ngClass]="{'uk-text-muted':setClasses().secondClass}">Menu</a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                     <li><a [routerLink]="['/']">Home</a></li>
@@ -59,8 +59,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a [routerLink]="['/signup']">Signup</a> </li>
-                    <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a [routerLink]="['/login']">Login</a> </li>
+                    <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a class="uk-navbar-item" [ngClass]="{'uk-text-muted':setClasses().secondClass}" [routerLink]="['/signup']">Signup</a> </li>
+                    <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a class="uk-navbar-item" [ngClass]="{'uk-text-muted':setClasses().secondClass}" [routerLink]="['/login']">Login</a> </li>
             </ul>
         </div>    
     </nav>

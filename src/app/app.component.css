@@ -1,7 +1,19 @@
-@import '~myscript/dist/myscript.min.css';
+/* @import '~myscript/dist/myscript.min.css';
 
 #editor {
   min-width: 500px;
   max-width: 500px;
   height: 400px;
+} */
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+  
+body {
+    margin: 0;
+    padding: 0;
 }

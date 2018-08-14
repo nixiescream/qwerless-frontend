@@ -1,0 +1,49 @@
+.main-section{ 
+    height: 687px;
+    background: #000000;
+    margin-top: -100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-section:before{
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.4;
+    /* background-image: url('https://img-aws.ehowcdn.com/877x500p/cache.gettyimages.com/xc/87570960.jpg?v=1&c=EWSAsset&k=2&d=910C62E22B9F47AA5E7B08ABBAC118E35B0DD8BFBCB60CB4BD92290E2F79097B'); */
+    /* background-image: url('http://www.audienciaelectronica.net/wp-content/uploads/2017/04/M%C3%A1quina-de-escribir.jpg'); */
+    /* background-image: url('https://d2t5zic2rt51h6.cloudfront.net/wp-content/uploads/sites/10/2011/04/cA4aKEIPQrerBnp1yGHv_IMG_9534-3-2.jpg'); */
+    background-image: url('https://qcostarica.com/wp-content/uploads/2017/07/o-TYPEWRITER-facebook.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.slogan{
+    position: absolute;
+    width: 100%;
+    margin: 300px auto;
+    z-index: 2;
+}
+
+.slogan h4{
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Roboto', Helvetica, sans-serif;
+    /* font-family: 'Grand Hotel', cursive; */
+}
+
+/* .slogan span{
+    font-family: 'Grand Hotel', cursive;
+} */

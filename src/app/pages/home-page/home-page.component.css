@@ -56,3 +56,12 @@ hr{
 .info h3{
     font-family: 'Grand Hotel', cursive;
 }
+
+footer{
+    text-align: center;
+    background-color: lightgrey;
+}
+
+.link{
+    font-size: 30px;
+}

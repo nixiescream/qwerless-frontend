@@ -44,6 +44,10 @@
     /* font-family: 'Grand Hotel', cursive; */
 }
 
+hr{
+    border-top: 1px solid transparent;
+}
+
 .info{
     margin: 25px 30px;
     text-align: center;

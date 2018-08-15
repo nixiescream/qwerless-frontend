@@ -20,15 +20,13 @@
                             <li><a [routerLink]="['/']">Home</a></li>
                             <li><a [routerLink]="['/profile']">{{user.username}}</a></li>
                             <li><a [routerLink]="['/new']">Create note</a></li>
-                            <!-- <li><a href="/jobs/create">Create a job</a></li> -->
-                            <!-- <li><a href="/jobs">My jobs</a></li> -->
+                            <li><a [routerLink]="['/list']">My notes</a></li>
                             <li class="uk-nav-divider"></li>
                             <li><a (click)="logout()">Logout</a></li>
                         </ul>
                     </div>
                     <div *ngIf="!loading && anon">
                         <ul class="uk-nav">
-                            <!-- <li><a href="/">Home</a></li> -->
                             <li> <a [routerLink]="['/signup']">Signup</a> </li>
                             <li> <a [routerLink]="['/login']">Login</a> </li>
                         </ul>
@@ -51,9 +49,8 @@
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                     <li><a [routerLink]="['/']">Home</a></li>
                                     <li><a [routerLink]="['/profile']">{{user.username}}</a></li>
-                                    <!-- <li><a href="/users/edit/{{currentUser._id}}">Edit profile</a></li> -->
-                                    <!-- <li><a href="/jobs/create">Create a job</a></li> -->
-                                    <!-- <li><a href="/jobs">My jobs</a></li> -->
+                                    <li><a [routerLink]="['/new']">Create note</a></li>
+                                    <li><a [routerLink]="['/list']">My notes</a></li>
                                     <li class="uk-nav-divider"></li>
                                     <li><a (click)="logout()">Logout</a></li>
                             </ul>

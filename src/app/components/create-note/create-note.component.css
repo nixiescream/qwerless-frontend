@@ -1,0 +1,6 @@
+@import '~myscript/dist/myscript.min.css';
+
+#editor {
+  width: 100%;
+  height: 500px;
+}

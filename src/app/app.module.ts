@@ -18,12 +18,15 @@ import { SignupComponent } from './components/signup/signup.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { CreateNotePageComponent } from './pages/create-note-page/create-note-page.component';
+import { CreateNoteComponent } from './components/create-note/create-note.component';
 
 const routes: Routes = [
     { path: '',  component: HomePageComponent, canActivate: [ InitAuthGuard ] },
     { path: 'login',  component: LoginPageComponent, canActivate: [ RequireAnonGuard ] },
     { path: 'signup',  component: SignupPageComponent, canActivate: [ RequireAnonGuard ] },
     { path: 'profile',  component: ProfileComponent, canActivate: [ RequireUserGuard ] },
+    { path: 'new', component: CreateNotePageComponent, canActivate: [ RequireUserGuard] },
     { path: '**', component: NotFoundComponent } 
 ]
 
@@ -37,7 +40,9 @@ const routes: Routes = [
     SignupComponent,
     NotFoundComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    CreateNotePageComponent,
+    CreateNoteComponent,
   ],
   imports: [
     BrowserModule,

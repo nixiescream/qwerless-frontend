@@ -44,6 +44,11 @@
     /* font-family: 'Grand Hotel', cursive; */
 }
 
-/* .slogan span{
+.info{
+    margin: 25px 30px;
+    text-align: center;
+}
+
+.info h3{
     font-family: 'Grand Hotel', cursive;
-} */
+}

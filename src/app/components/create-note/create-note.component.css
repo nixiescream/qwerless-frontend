@@ -1,5 +1,3 @@
-@import '~myscript/dist/myscript.min.css';
-
-#editor {
-  width: 100%;
+.button-nav {
+    height: 40px;
 }

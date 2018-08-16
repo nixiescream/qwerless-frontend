@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { NotesService } from './services/notes.service';
 import { FormsModule } from '@angular/forms';
+
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -55,6 +56,9 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+    ],
   providers: [
     AuthService,
     NotesService,

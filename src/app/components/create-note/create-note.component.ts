@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild,  ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import * as MyScriptJS from 'myscript';
+import { NotesService } from '../../services/notes.service';
 
 @Component({
   selector: 'app-create-note',
@@ -11,7 +13,7 @@ export class CreateNoteComponent implements OnInit {
     @ViewChild("tref", {read: ElementRef}) domEditor: ElementRef;
     editor;
 
-    constructor(private elementRef:ElementRef) { }
+    constructor(private elementRef: ElementRef, private notesService: NotesService, private router: Router) { }
 
     editorElement;
     undoElement;
@@ -27,12 +29,21 @@ export class CreateNoteComponent implements OnInit {
         this.exportElement = this.elementRef.nativeElement.querySelector('#exportContent');
         this.convertElement = this.elementRef.nativeElement.querySelector('#convertContent');
         this.editorElement = this.elementRef.nativeElement.querySelector('#editor');
+
         this.editorElement.addEventListener('changed', event => {
             this.undoElement.disabled = !event.detail.canUndo;
             this.redoElement.disabled = !event.detail.canRedo;
             this.exportElement.disabled = !event.detail.canExport;
             this.convertElement.disabled = !event.detail.canConvert;
             this.clearElement.disabled = event.detail.isEmpty;
+        });
+        this.editorElement.addEventListener('exported', evt => {
+            if (evt.detail) {
+                const data = evt.detail.exports['text/plain'].split('\n');
+                this.submitData(data);
+            } else {
+                console.log('asdf');
+            }
         });
         this.undoElement.addEventListener('click', () => {
             this.editorElement.editor.undo();
@@ -74,6 +85,13 @@ export class CreateNoteComponent implements OnInit {
                 },
             },
         });
+    }
+
+    submitData(data){
+        this.notesService.addNote(data)
+            .then(() => {
+                this.router.navigate(['/']);
+            });
     }
 
 }

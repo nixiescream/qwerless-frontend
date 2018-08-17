@@ -23,6 +23,7 @@ import { CreateNotePageComponent } from './pages/create-note-page/create-note-pa
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { ListNotesPageComponent } from './pages/list-notes-page/list-notes-page.component';
 import { NoteCardComponent } from './components/note-card/note-card.component';
+import { NoteDetailPageComponent } from './pages/note-detail-page/note-detail-page.component';
 
 const routes: Routes = [
     { path: '',  component: HomePageComponent, canActivate: [ InitAuthGuard ] },
@@ -49,6 +50,7 @@ const routes: Routes = [
     CreateNoteComponent,
     ListNotesPageComponent,
     NoteCardComponent,
+    NoteDetailPageComponent,
   ],
   imports: [
     BrowserModule,

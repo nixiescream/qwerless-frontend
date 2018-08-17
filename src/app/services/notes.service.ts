@@ -4,44 +4,43 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class NotesService {
 
     private API_URL = environment.API_URL;
 
     constructor(private httpClient: HttpClient) { }
 
-    list(){
+    listNotes(){
         const options = {
             withCredentials: true
         };
         return this.httpClient.get(`${this.API_URL}/notes`, options);
     }
 
-    add(data){
+    addNote(data): Promise<any>{
         const options = {
             withCredentials: true
         };
-        return this.httpClient.post(`${this.API_URL}/notes`, data, options);
+        return this.httpClient.post(`${this.API_URL}/notes`, data, options).toPromise();
     }
 
-    detail(id){
+    detailNote(id){
         const options = {
             withCredentials: true
         };
         return this.httpClient.get(`${this.API_URL}/notes/${id}`, options);
     }
 
-    edit(id){
+    editNote(id){
         const options = {
             withCredentials: true
         };
         return this.httpClient.put(`${this.API_URL}/notes/${id}`, options);
     }
 
-    delete(id){
+    deleteNote(id){
         const options = {
             withCredentials: true
         };

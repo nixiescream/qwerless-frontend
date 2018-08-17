@@ -21,16 +21,16 @@ export class LoginComponent implements OnInit {
     }
 
     submitForm(form) {
-    this.authService.login({
-        username: this.username,
-        password: this.password
-    })
-    .then(()=> {
-        this.router.navigate(['/'])
-    })
-    .catch(error => {
-        console.log(error)
-    })  
+        this.authService.login({
+            username: this.username,
+            password: this.password
+        })
+        .then(()=> {
+            this.router.navigate(['/']);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
 
 }

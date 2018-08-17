@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-note-card',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoteCardComponent implements OnInit {
 
-  constructor() { }
+    @Input() note: any;
+    
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

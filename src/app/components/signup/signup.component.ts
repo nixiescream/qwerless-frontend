@@ -22,17 +22,17 @@ export class SignupComponent implements OnInit {
     }
 
     submitForm(form) {
-    this.authService.signup({
-        username: this.username,
-        email: this.email,
-        password: this.password
-    })
-    .then(()=> {
-        this.router.navigate(['/private'])
-    })
-    .catch(error => {
-        console.log(error)
-    })  
+        this.authService.signup({
+            username: this.username,
+            email: this.email,
+            password: this.password
+        })
+        .then(()=> {
+            this.router.navigate(['/'])
+        })
+        .catch(error => {
+            console.log(error)
+        }); 
     }
 
 }

@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.uk-logo, .uk-navbar-toggle, .uk-navbar-item, #menu-navbar{
+.uk-logo, .uk-navbar-toggle, .uk-navbar-item, li a{
     color: white;
 }
 

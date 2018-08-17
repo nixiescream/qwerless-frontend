@@ -90,7 +90,7 @@ export class CreateNoteComponent implements OnInit {
     submitData(data){
         this.notesService.addNote(data)
             .then(() => {
-                this.router.navigate(['/']);
+                this.router.navigate(['/list']);
             });
     }
 

@@ -44,7 +44,17 @@
         <div class="uk-navbar-right" [ngClass]="{'is-user': user, 'is-anon': anon}">
             <ul class="uk-navbar-nav">
                 <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">
-                    <a href="#" id="menu-navbar" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">Menu</a>
+                    <a [routerLink]="['/profile']" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">{{user.username}}</a>
+                </li>
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">
+                    <a [routerLink]="['/new']" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">Create note</a>
+                </li>
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">   
+                    <a [routerLink]="['/list']" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">My notes</a>
+                </li> 
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">       
+                    <a (click)="logout()" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">Logout</a>
+                    <!-- <a href="#" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">Menu</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
                             <li><a [routerLink]="['/']">Home</a></li>
@@ -54,7 +64,7 @@
                             <li class="uk-nav-divider"></li>
                             <li><a (click)="logout()">Logout</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </li>
                 <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a class="uk-navbar-item" [ngClass]="{'uk-text-muted':setClasses().secondClass}" [routerLink]="['/signup']">Signup</a> </li>
                 <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a class="uk-navbar-item" [ngClass]="{'uk-text-muted':setClasses().secondClass}" [routerLink]="['/login']">Login</a> </li>

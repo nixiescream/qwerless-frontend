@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../../services/notes.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-note-detail-page',
@@ -8,9 +9,29 @@ import { NotesService } from '../../services/notes.service';
 })
 export class NoteDetailPageComponent implements OnInit {
 
-  constructor() { }
+    noteId: any;
+    note: any;
 
-  ngOnInit() {
-  }
+    constructor( private notesService: NotesService, private route: ActivatedRoute, private router: Router) { }
+
+    ngOnInit() {
+        this.route.params
+            .subscribe(params => {
+                this.noteId = params['id']
+            });
+        
+        this.notesService.detailNote(this.noteId)
+            .subscribe(note => {
+                this.note = note;
+            });
+    }
+
+    removeNote(){
+        this.notesService.deleteNote(this.noteId)
+        .toPromise()
+        .then(() => {
+            this.router.navigate(['/list']);
+        });
+    }
 
 }

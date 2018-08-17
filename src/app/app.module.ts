@@ -32,6 +32,7 @@ const routes: Routes = [
     { path: 'profile',  component: ProfileComponent, canActivate: [ RequireUserGuard ] },
     { path: 'new', component: CreateNotePageComponent, canActivate: [ RequireUserGuard] },
     { path: 'list', component: ListNotesPageComponent, canActivate: [ RequireUserGuard ] },
+    { path: 'note/:id', component: NoteDetailPageComponent, canActivate: [ RequireUserGuard ] },
     { path: '**', component: NotFoundComponent } 
 ]
 

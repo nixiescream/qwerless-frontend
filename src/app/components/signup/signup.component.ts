@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { environment } from '../../../environments/environment';
-import { Cloudinary } from '@cloudinary/angular-5.x';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -15,8 +13,6 @@ export class SignupComponent implements OnInit {
 
     @Input()
     responses: Array<any>;
-
-    private hasBaseDropZoneOver: boolean = false;
 
     private CLOUDINARY_URL = environment.CLOUDINARY_URL;
     private CLOUDINARY_UPLOAD_PRESET = environment.CLOUDINARY_UPLOAD_PRESET;
@@ -31,13 +27,8 @@ export class SignupComponent implements OnInit {
     
     constructor( 
         private authService: AuthService,
-        private router : Router,
-        private cloudinary: Cloudinary,
-        private zone: NgZone,
-        private http: HttpClient
-      ) {
-        this.responses = [];
-      }
+        private router : Router
+      ) {}
 
     ngOnInit() {
         const uploaderOptions: FileUploaderOptions = {

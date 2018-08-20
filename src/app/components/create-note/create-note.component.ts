@@ -45,23 +45,23 @@ export class CreateNoteComponent implements OnInit {
                 console.log('asdf');
             }
         });
-        this.undoElement.addEventListener('click', () => {
-            this.editorElement.editor.undo();
-        });
-        this.redoElement.addEventListener('click', () => {
-            this.editorElement.editor.redo();
-        });
-        this.clearElement.addEventListener('click', () => {
-            this.editorElement.editor.clear();
-        });
-        this.exportElement.addEventListener('click', () => {
-            this.exportElement.disabled = true;
-            this.editorElement.editor.export_();
-        });
-        this.convertElement.addEventListener('click', () => {
-            this.convertElement.disabled = true;
-            this.editorElement.editor.convert();
-        });
+        // this.undoElement.addEventListener('click', () => {
+        //     this.editorElement.editor.undo();
+        // });
+        // this.redoElement.addEventListener('click', () => {
+        //     this.editorElement.editor.redo();
+        // });
+        // this.clearElement.addEventListener('click', () => {
+        //     this.editorElement.editor.clear();
+        // });
+        // this.exportElement.addEventListener('click', () => {
+        //     this.exportElement.disabled = true;
+        //     this.editorElement.editor.export_();
+        // });
+        // this.convertElement.addEventListener('click', () => {
+        //     this.convertElement.disabled = true;
+        //     this.editorElement.editor.convert();
+        // });
     }
 
     ngOnInit() {
@@ -85,6 +85,28 @@ export class CreateNoteComponent implements OnInit {
                 },
             },
         });
+    }
+
+    undo(){
+        this.editorElement.editor.undo();
+    }
+
+    redo(){
+        this.editorElement.editor.redo();
+    }
+
+    clear(){
+        this.editorElement.editor.clear();
+    }
+
+    export(){
+        this.exportElement.disabled = true;
+        this.editorElement.editor.export_();
+    }
+
+    convert(){
+        this.convertElement.disabled = true;
+        this.editorElement.editor.convert();
     }
 
     submitData(data){

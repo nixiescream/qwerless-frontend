@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
 
     user: any;
+    image: any;
 
     constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit() {
         this.user = this.authService.getUser();
+        this.image = `http://localhost:3000${this.user.image}`;
     }
 
 }

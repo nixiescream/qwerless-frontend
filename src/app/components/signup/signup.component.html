@@ -1,5 +1,5 @@
 <!-- <form (ngSubmit)="submitForm(form)" #form="ngForm" class="form"> -->
-<form class="form">
+    <form class="form">
     <div class="uk-margin" [ngClass]="{'has-error': feedbackEnabled && usernameField.errors}">
         <div class="field">
             <input type="text" placeholder="Username" name="username" class="uk-input uk-form-width-medium" [(ngModel)]="username" #usernameField="ngModel" required />
@@ -12,9 +12,8 @@
         </div>
         <!-- <div class="uk-margin" uk-margin>
             <div uk-form-custom="target: true">
-                <input type="file" name="file" ng2FileSelect [uploader]="uploader">
+                <input type="file" name="file" id="fileupload" #fileInput ng2FileSelect [uploader]="uploader">
                 <input class="uk-input uk-form-width-medium" type="text" placeholder="Select image" disabled>
-                
             </div>
         </div> -->
         <input type="file" name="file" ng2FileSelect [uploader]="uploader" />

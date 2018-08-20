@@ -6,6 +6,8 @@ import { AuthService } from './services/auth.service';
 import { NotesService } from './services/notes.service';
 import { FormsModule } from '@angular/forms';
 import { FileSelectDirective } from "ng2-file-upload";
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import { Cloudinary } from 'cloudinary-core';
 
 
 import { AppComponent } from './app.component';
@@ -59,7 +61,8 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'qwerless' } as CloudinaryConfiguration),
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

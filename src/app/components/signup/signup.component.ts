@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { FileUploader } from 'ng2-file-upload';
+import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { environment } from '../../../environments/environment';
+import { Cloudinary } from '@cloudinary/angular-5.x';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -11,56 +13,73 @@ import { environment } from '../../../environments/environment';
 })
 export class SignupComponent implements OnInit {
 
-    private API_URL = environment.API_URL;
+    @Input()
+    responses: Array<any>;
 
-    uploader: FileUploader = new FileUploader({
-        url: `${this.API_URL}/auth/signup`
-    });
+    private hasBaseDropZoneOver: boolean = false;
+
+    private CLOUDINARY_URL = environment.CLOUDINARY_URL;
+    private CLOUDINARY_UPLOAD_PRESET = environment.CLOUDINARY_UPLOAD_PRESET;
+    private CLOUDINADY_IMAGE = environment.CLOUDINADY_IMAGE;
+
+    private uploader: FileUploader;
 
     username: string;
     email: string;
     password: string;
-    // feedback: string;
+    image: any;
     
     constructor( 
         private authService: AuthService,
-        private router : Router
-    ) { }
-
-    ngOnInit() {
-        // this.uploader.onSuccessItem = (item, response) => {
-        //     this.feedback = JSON.parse(response).message;
-        // };
-      
-        // this.uploader.onErrorItem = (item, response, status, headers) => {
-        //     this.feedback = JSON.parse(response).message;
-        // };
-    }
-
-    // submitForm(form) {
-    //     this.authService.signup({
-    //         username: this.username,
-    //         email: this.email,
-    //         password: this.password
-    //     })
-    //     .then(()=> {
-    //         this.uploader.uploadAll();
-    //         this.router.navigate(['/']);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     }); 
-    // }
-
-    submit() {
-        this.uploader.onBuildItemForm = (item, form) => {
-          form.append('username', this.username);
-          form.append('email', this.email);
-          form.append('password', this.password);
-        };
-    
-        this.uploader.uploadAll();
-        this.router.navigate(['/']);
+        private router : Router,
+        private cloudinary: Cloudinary,
+        private zone: NgZone,
+        private http: HttpClient
+      ) {
+        this.responses = [];
       }
 
+    ngOnInit() {
+        const uploaderOptions: FileUploaderOptions = {
+            url: this.CLOUDINARY_URL,
+            autoUpload: false,
+            isHTML5: true,
+            removeAfterUpload: true,
+            headers: [{
+                name: 'X-Requested-With',
+                value: 'XMLHttpRequest'
+            }]
+        };
+        this.uploader = new FileUploader(uploaderOptions);
+
+        this.uploader.onBuildItemForm = (item, form) => {
+            form.append('upload_preset', this.CLOUDINARY_UPLOAD_PRESET);
+            form.append('folder', 'users-images');
+            form.append('file', item);
+      
+            item.withCredentials = false;
+        };
+        this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
+            console.log(item);
+            console.log(response);
+            this.image = this.CLOUDINADY_IMAGE + JSON.parse(response).public_id;
+
+            this.authService.signup({
+                username: this.username,
+                email: this.email,
+                password: this.password,
+                image: this.image
+            })
+            .then(()=> {
+                this.router.navigate(['/']);
+            })
+            .catch(error => {
+                console.log(error);
+            }); 
+        }
+    }
+
+    submit() {
+        this.uploader.uploadAll();
+    }
 }

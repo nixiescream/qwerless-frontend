@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.authService.getUser();
-        this.image = `http://localhost:3000${this.user.image}`;
+        this.image = this.user.image;
     }
 
 }

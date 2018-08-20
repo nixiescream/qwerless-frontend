@@ -60,8 +60,6 @@ export class SignupComponent implements OnInit {
             item.withCredentials = false;
         };
         this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
-            console.log(item);
-            console.log(response);
             this.image = this.CLOUDINADY_IMAGE + JSON.parse(response).public_id;
 
             this.authService.signup({

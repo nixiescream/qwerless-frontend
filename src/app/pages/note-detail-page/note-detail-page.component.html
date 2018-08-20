@@ -1,20 +1,20 @@
-<div class="uk-grid-small uk-flex-wrap uk-flex-top uk-flex-row uk-flex-around@m uk-flex-around@l uk-flex-around@xl" uk-grid="masonry: true">
-<div class="note-card uk-card uk-card-default uk-width-1-1">
-    <div class="uk-card-header">
-        <div class="uk-grid-small uk-flex-middle" uk-grid>
-            <div class="uk-width-expand">
-                <h3 class="uk-card-title uk-margin-remove-bottom uk-align-left">{{note.title}}</h3>
-                <a class="uk-margin-remove-top uk-margin-remove-bottom uk-align-right"><i class="uk-text-muted fas fa-pencil-alt"></i></a>
+<div *ngIf="note" class="uk-grid-small uk-flex-wrap uk-flex-top uk-flex-row uk-flex-around@m uk-flex-around@l uk-flex-around@xl" uk-grid="masonry: true">
+    <div class="note-card uk-card uk-card-default uk-width-1-1">
+        <div class="uk-card-header">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-expand">
+                    <h3 class="uk-card-title uk-margin-remove-bottom uk-align-left">{{note.title}}</h3>
+                    <a class="uk-margin-remove-top uk-margin-remove-bottom uk-align-right"><i class="uk-text-muted fas fa-pencil-alt"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="uk-card-body">
+            <p>{{note.content}}</p>
+        </div>
+        <div class="uk-card-footer">
+            <div class="links uk-grid-small uk-flex-middle uk-flex-center" uk-grid>
+                <a (click)="removeNote()" class="uk-button uk-button-default uk-button-small"><i class="uk-text-muted fas fa-trash-alt"></i></a>
             </div>
         </div>
     </div>
-    <div class="uk-card-body">
-        <p>{{note.content}}</p>
-    </div>
-    <div class="uk-card-footer">
-        <div class="links uk-grid-small uk-flex-middle uk-flex-center" uk-grid>
-            <a (click)="removeNote()" class="uk-button uk-button-default uk-button-small"><i class="uk-text-muted fas fa-trash-alt"></i></a>
-        </div>
-    </div>
-</div>
 </div>

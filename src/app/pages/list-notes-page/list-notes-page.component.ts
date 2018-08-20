@@ -9,7 +9,7 @@ import { NotesService } from '../../services/notes.service';
 })
 export class ListNotesPageComponent implements OnInit {
 
-    notes;
+    notes: any;
 
     constructor(private notesService: NotesService) { }
 

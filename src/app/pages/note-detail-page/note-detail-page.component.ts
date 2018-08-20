@@ -28,10 +28,10 @@ export class NoteDetailPageComponent implements OnInit {
 
     removeNote(){
         this.notesService.deleteNote(this.noteId)
-        .toPromise()
-        .then(() => {
-            this.router.navigate(['/list']);
-        });
+            .toPromise()
+            .then(() => {
+                this.router.navigate(['/list']);
+            });
     }
 
 }

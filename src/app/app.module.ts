@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { NotesService } from './services/notes.service';
 import { FormsModule } from '@angular/forms';
-import { FileSelectDirective } from "ng2-file-upload";
+import { FileUploadModule } from "ng2-file-upload";
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
 
@@ -42,7 +42,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    FileSelectDirective,
     LoginPageComponent,
     HomePageComponent,
     SignupPageComponent,
@@ -61,6 +60,7 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    FileUploadModule,
     RouterModule.forRoot(routes),
     CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'qwerless' } as CloudinaryConfiguration),
   ],

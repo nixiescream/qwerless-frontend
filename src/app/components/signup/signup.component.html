@@ -1,5 +1,5 @@
 <form class="form">
-    <div class="uk-margin" [ngClass]="{'has-error': feedbackEnabled && usernameField.errors}">
+    <div class="uk-margin" [ngClass]="{'has-error': usernameField.errors}">
         <div class="field">
             <input type="text" placeholder="Username" name="username" class="uk-input uk-form-width-medium" [(ngModel)]="username" #usernameField="ngModel" required />
         </div>

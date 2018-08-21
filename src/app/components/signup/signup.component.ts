@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
     private CLOUDINARY_UPLOAD_PRESET = environment.CLOUDINARY_UPLOAD_PRESET;
     private CLOUDINADY_IMAGE = environment.CLOUDINADY_IMAGE;
 
-    private uploader: FileUploader;
+    uploader: FileUploader;
 
     username: string;
     email: string;

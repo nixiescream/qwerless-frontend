@@ -15,7 +15,7 @@
         <ul class="uk-nav uk-nav-default">
             <button class="uk-offcanvas-close" type="button" uk-close></button>
             <div [ngClass]="{'is-user': user, 'is-anon': anon}">
-                <div *ngIf="!loading && !!user">
+                <div *ngIf="!!user">
                     <ul class="uk-nav">
                         <li><a [routerLink]="['/']">Home</a></li>
                         <li><a [routerLink]="['/profile']">{{user.username}}</a></li>
@@ -25,7 +25,7 @@
                         <li><a (click)="logout()">Logout</a></li>
                     </ul>
                 </div>
-                <div *ngIf="!loading && anon">
+                <div *ngIf="anon">
                     <ul class="uk-nav">
                         <li> <a [routerLink]="['/signup']">Signup</a> </li>
                         <li> <a [routerLink]="['/login']">Login</a> </li>
@@ -43,31 +43,20 @@
         </div>
         <div class="uk-navbar-right" [ngClass]="{'is-user': user, 'is-anon': anon}">
             <ul class="uk-navbar-nav">
-                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="!!user">
                     <a [routerLink]="['/profile']" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">{{user.username}}</a>
                 </li>
-                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="!!user">
                     <a [routerLink]="['/new']" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">Create note</a>
                 </li>
-                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">   
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="!!user">   
                     <a [routerLink]="['/list']" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">My notes</a>
                 </li> 
-                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && !!user">       
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="!!user">       
                     <a (click)="logout()" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">Logout</a>
-                    <!-- <a href="#" [ngClass]="{'uk-text-muted':setClasses().secondClass || isScrolled && setClasses().homeClass}">Menu</a>
-                    <div class="uk-navbar-dropdown">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a [routerLink]="['/']">Home</a></li>
-                            <li><a [routerLink]="['/profile']">{{user.username}}</a></li>
-                            <li><a [routerLink]="['/new']">Create note</a></li>
-                            <li><a [routerLink]="['/list']">My notes</a></li>
-                            <li class="uk-nav-divider"></li>
-                            <li><a (click)="logout()">Logout</a></li>
-                        </ul>
-                    </div> -->
                 </li>
-                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a class="uk-navbar-item" [ngClass]="{'uk-text-muted':setClasses().secondClass}" [routerLink]="['/signup']">Signup</a> </li>
-                <li class="uk-navbar-item uk-hidden-small" *ngIf="!loading && anon"> <a class="uk-navbar-item" [ngClass]="{'uk-text-muted':setClasses().secondClass}" [routerLink]="['/login']">Login</a> </li>
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="anon"> <a class="uk-navbar-item" [ngClass]="{'uk-text-muted':setClasses().secondClass}" [routerLink]="['/signup']">Signup</a> </li>
+                <li class="uk-navbar-item uk-hidden-small" *ngIf="anon"> <a class="uk-navbar-item" [ngClass]="{'uk-text-muted':setClasses().secondClass}" [routerLink]="['/login']">Login</a> </li>
             </ul>
         </div>    
     </nav>

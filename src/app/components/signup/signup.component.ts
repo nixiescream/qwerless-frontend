@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
@@ -12,7 +12,6 @@ import { environment } from '../../../environments/environment';
 export class SignupComponent implements OnInit {
 
     @Input()
-    responses: Array<any>;
 
     private CLOUDINARY_URL = environment.CLOUDINARY_URL;
     private CLOUDINARY_UPLOAD_PRESET = environment.CLOUDINARY_UPLOAD_PRESET;

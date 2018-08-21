@@ -1,20 +1,24 @@
 import { Component, OnInit, ViewChild,  ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as MyScriptJS from 'myscript';
 import { NotesService } from '../../services/notes.service';
 
 @Component({
-  selector: 'app-create-note',
-  templateUrl: './create-note.component.html',
-  styleUrls: ['./create-note.component.css']
+  selector: 'app-edit-note',
+  templateUrl: './edit-note.component.html',
+  styleUrls: ['./edit-note.component.css']
 })
-export class CreateNoteComponent implements OnInit {
+export class EditNoteComponent implements OnInit {
 
     @ViewChild("tref", {read: ElementRef}) domEditor: ElementRef;
     editor;
 
-    constructor(private elementRef: ElementRef, private notesService: NotesService, private router: Router) { }
+    constructor(private elementRef: ElementRef, private notesService: NotesService, private router: Router, private route: ActivatedRoute) { }
 
+    noteId: any;
+    note: any;
+    noteRawStrokes: Array<any>;
+    noteStrokeGroups: Array<any>;
     rawStrokes: Array<any>;
     strokeGroups: Array<any>;
     content: Array<any>;
@@ -39,7 +43,6 @@ export class CreateNoteComponent implements OnInit {
             this.exportElement.disabled = !event.detail.canExport;
             this.convertElement.disabled = !event.detail.canConvert;
             this.clearElement.disabled = event.detail.isEmpty;
-            console.log(this.editor);
         });
         this.editorElement.addEventListener('exported', evt => {
             if (evt.detail) {
@@ -75,6 +78,20 @@ export class CreateNoteComponent implements OnInit {
                 },
             },
         });
+
+        this.route.params
+            .subscribe(params => {
+                this.noteId = params['id']
+            });
+        
+        this.notesService.detailNote(this.noteId)
+            .subscribe(note => {
+                this.note = note;
+                this.noteRawStrokes = this.note['rawStrokes'];
+                this.noteStrokeGroups = this.note['strokeGroups'];
+                this.editor.reDraw(this.noteRawStrokes, this.noteStrokeGroups);
+                console.log(this.editor);
+            });
     }
 
     undo(){
@@ -100,7 +117,7 @@ export class CreateNoteComponent implements OnInit {
     }
 
     submitData(data){
-        this.notesService.addNote(data)
+        this.notesService.editNote(data)
             .then(() => {
                 this.router.navigate(['/list']);
             });

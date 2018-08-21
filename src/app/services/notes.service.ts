@@ -37,7 +37,7 @@ export class NotesService {
         const options = {
             withCredentials: true
         };
-        return this.httpClient.put(`${this.API_URL}/notes/${id}`, options);
+        return this.httpClient.put(`${this.API_URL}/notes/${id}`, options).toPromise();
     }
 
     deleteNote(id){

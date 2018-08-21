@@ -27,6 +27,8 @@ import { CreateNoteComponent } from './components/create-note/create-note.compon
 import { ListNotesPageComponent } from './pages/list-notes-page/list-notes-page.component';
 import { NoteCardComponent } from './components/note-card/note-card.component';
 import { NoteDetailPageComponent } from './pages/note-detail-page/note-detail-page.component';
+import { EditNotePageComponent } from './pages/edit-note-page/edit-note-page.component';
+import { EditNoteComponent } from './components/edit-note/edit-note.component';
 
 const routes: Routes = [
     { path: '',  component: HomePageComponent, canActivate: [ InitAuthGuard ] },
@@ -36,6 +38,7 @@ const routes: Routes = [
     { path: 'new', component: CreateNotePageComponent, canActivate: [ RequireUserGuard] },
     { path: 'list', component: ListNotesPageComponent, canActivate: [ RequireUserGuard ] },
     { path: 'note/:id', component: NoteDetailPageComponent, canActivate: [ RequireUserGuard ] },
+    { path: 'edit/:id', component: EditNotePageComponent, canActivate: [ RequireUserGuard ] },
     { path: '**', component: NotFoundComponent } 
 ]
 
@@ -55,6 +58,8 @@ const routes: Routes = [
     ListNotesPageComponent,
     NoteCardComponent,
     NoteDetailPageComponent,
+    EditNotePageComponent,
+    EditNoteComponent,
   ],
   imports: [
     BrowserModule,

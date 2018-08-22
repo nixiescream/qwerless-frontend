@@ -44,6 +44,10 @@ hr{
     border-top: 1px solid transparent;
 }
 
+.info-section{
+    margin-bottom: 50px;
+}
+
 .info{
     margin: 25px 30px;
     text-align: center;

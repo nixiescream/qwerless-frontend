@@ -39,7 +39,6 @@ export class CreateNoteComponent implements OnInit {
             this.exportElement.disabled = !event.detail.canExport;
             this.convertElement.disabled = !event.detail.canConvert;
             this.clearElement.disabled = event.detail.isEmpty;
-            console.log(this.editor);
         });
         this.editorElement.addEventListener('exported', evt => {
             if (evt.detail) {

@@ -19,6 +19,8 @@ export class EditNoteComponent implements OnInit {
     note: any;
     noteRawStrokes: Array<any>;
     noteStrokeGroups: Array<any>;
+    pointers: any;
+    events = [];
     rawStrokes: Array<any>;
     strokeGroups: Array<any>;
     content: Array<any>;
@@ -50,7 +52,7 @@ export class EditNoteComponent implements OnInit {
                 this.strokeGroups = this.editor.model.strokeGroups;
                 this.content = evt.detail.exports['text/plain'].split('\n');
                 const data = [this.content, this.rawStrokes, this.strokeGroups];
-                this.submitData(data);
+                this.submitData(this.noteId, data);
             } else {
                 console.log('asdf');
             }
@@ -88,9 +90,23 @@ export class EditNoteComponent implements OnInit {
             .subscribe(note => {
                 this.note = note;
                 this.noteRawStrokes = this.note['rawStrokes'];
-                this.noteStrokeGroups = this.note['strokeGroups'];
-                this.editor.reDraw(this.noteRawStrokes, this.noteStrokeGroups);
-                console.log(this.editor);
+                this.strokeGroups = this.note['strokeGroups'];
+                this.editor.reDraw(this.noteRawStrokes, this.strokeGroups)
+                this.noteRawStrokes.forEach(element => {
+                    const pointer = {
+                        "pointerType": 'PEN',
+                        "pointerId": element.pointerId,
+                        "x": element.x,
+                        "y": element.y,
+                        "t": element.t,
+                        "p": element.p
+                    }
+                    this.events.push(pointer);
+                });
+                this.pointers = {
+                    "events": this.events
+                };
+                this.editor.pointerEvents(this.pointers);
             });
     }
 
@@ -116,8 +132,8 @@ export class EditNoteComponent implements OnInit {
         this.editorElement.editor.convert();
     }
 
-    submitData(data){
-        this.notesService.editNote(data)
+    submitData(id, data){
+        this.notesService.editNote(id, data)
             .then(() => {
                 this.router.navigate(['/list']);
             });

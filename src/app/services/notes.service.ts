@@ -33,11 +33,11 @@ export class NotesService {
         return this.httpClient.get(`${this.API_URL}/notes/${id}`, options);
     }
 
-    editNote(id){
+    editNote(id, data){
         const options = {
             withCredentials: true
         };
-        return this.httpClient.put(`${this.API_URL}/notes/${id}`, options).toPromise();
+        return this.httpClient.put(`${this.API_URL}/notes/${id}`, data, options).toPromise();
     }
 
     deleteNote(id){

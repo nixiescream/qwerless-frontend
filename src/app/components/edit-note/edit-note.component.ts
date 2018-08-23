@@ -1,7 +1,11 @@
-import { Component, OnInit, ViewChild,  ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as MyScriptJS from 'myscript';
 import { NotesService } from '../../services/notes.service';
+import * as io from "socket.io-client";
+
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-edit-note',
@@ -13,8 +17,7 @@ export class EditNoteComponent implements OnInit {
     @ViewChild("tref", {read: ElementRef}) domEditor: ElementRef;
     editor;
 
-    constructor(private elementRef: ElementRef, private notesService: NotesService, private router: Router, private route: ActivatedRoute) { }
-
+    DOMAIN_NAME = environment.DOMAIN_NAME;
     noteId: any;
     note: any;
     noteRawStrokes: Array<any>;
@@ -30,6 +33,13 @@ export class EditNoteComponent implements OnInit {
     clearElement;
     exportElement;
     convertElement;
+    refreshing = false;
+    socket: SocketIOClient.Socket;
+
+    constructor(private elementRef: ElementRef, private notesService: NotesService, 
+        private router: Router, private route: ActivatedRoute) { 
+            this.socket = io.connect(this.DOMAIN_NAME, {secure: true});
+        }
 
     ngAfterViewInit() {
         this.undoElement = this.elementRef.nativeElement.querySelector('#undo');
@@ -46,6 +56,12 @@ export class EditNoteComponent implements OnInit {
             this.convertElement.disabled = !event.detail.canConvert;
             this.clearElement.disabled = event.detail.isEmpty;
         });
+
+        this.editorElement.addEventListener('mouseup', () => {
+            console.log('change emmited');
+            this.socket.emit('change', {rawStrokes: this.editor.model.rawStrokes, strokeGroups: this.editor.model.strokeGroups});
+        });
+        
         this.editorElement.addEventListener('exported', evt => {
             if (evt.detail) {
                 this.rawStrokes = this.editor.model.rawStrokes;
@@ -57,6 +73,31 @@ export class EditNoteComponent implements OnInit {
                 console.log('asdf');
             }
         });
+
+        this.socket.on('refresh', (strokes) => {
+            console.log("Refreshing");
+            this.refreshing = true;
+            this.noteRawStrokes = strokes.rawStrokes;
+            this.strokeGroups = strokes.strokeGroups;
+            this.editor.reDraw(this.noteRawStrokes, this.strokeGroups)
+            this.printStrokes(this.noteRawStrokes);
+            this.refreshing = false;
+        });
+
+        this.socket.on('request', (rid) => {
+            console.log("Requested");
+            this.socket.emit('refresh', {rid: rid, rawStrokes : this.editor.model.rawStrokes, strokeGroups: this.editor.model.strokeGroups});
+        });
+
+        this.socket.on('change', (strokes) => {
+            console.log('changed');
+            this.noteRawStrokes = strokes.rawStrokes;
+            this.strokeGroups = strokes.strokeGroups;
+            this.editor.reDraw(this.noteRawStrokes, this.strokeGroups)
+            this.printStrokes(this.noteRawStrokes);
+        });
+
+        this.socket.emit('session-change', this.noteId);
     }
 
     ngOnInit() {
@@ -88,25 +129,13 @@ export class EditNoteComponent implements OnInit {
         
         this.notesService.detailNote(this.noteId)
             .subscribe(note => {
+                this.refreshing = true;
                 this.note = note;
                 this.noteRawStrokes = this.note['rawStrokes'];
                 this.strokeGroups = this.note['strokeGroups'];
                 this.editor.reDraw(this.noteRawStrokes, this.strokeGroups)
-                this.noteRawStrokes.forEach(element => {
-                    const pointer = {
-                        "pointerType": 'PEN',
-                        "pointerId": element.pointerId,
-                        "x": element.x,
-                        "y": element.y,
-                        "t": element.t,
-                        "p": element.p
-                    }
-                    this.events.push(pointer);
-                });
-                this.pointers = {
-                    "events": this.events
-                };
-                this.editor.pointerEvents(this.pointers);
+                this.printStrokes(this.noteRawStrokes);
+                this.refreshing = false;
             });
     }
 
@@ -130,6 +159,24 @@ export class EditNoteComponent implements OnInit {
     convert(){
         this.convertElement.disabled = true;
         this.editorElement.editor.convert();
+    }
+
+    printStrokes(rawStrokes){
+        rawStrokes.forEach(element => {
+            const pointer = {
+                "pointerType": 'PEN',
+                "pointerId": element.pointerId,
+                "x": element.x,
+                "y": element.y,
+                "t": element.t,
+                "p": element.p
+            }
+            this.events.push(pointer);
+        });
+        this.pointers = {
+            "events": this.events
+        };
+        this.editor.pointerEvents(this.pointers);
     }
 
     submitData(id, data){

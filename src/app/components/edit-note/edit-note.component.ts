@@ -77,6 +77,8 @@ export class EditNoteComponent implements OnInit {
         this.socket.on('refresh', (strokes) => {
             console.log("Refreshing");
             this.refreshing = true;
+            this.editor.model.rawStrokes = [];
+            this.editor.model.strokeGroups = [];
             this.noteRawStrokes = strokes.rawStrokes;
             this.strokeGroups = strokes.strokeGroups;
             this.editor.reDraw(this.noteRawStrokes, this.strokeGroups)
@@ -91,6 +93,8 @@ export class EditNoteComponent implements OnInit {
 
         this.socket.on('change', (strokes) => {
             console.log('changed');
+            this.editor.model.rawStrokes = [];
+            this.editor.model.strokeGroups = [];
             this.noteRawStrokes = strokes.rawStrokes;
             this.strokeGroups = strokes.strokeGroups;
             this.editor.reDraw(this.noteRawStrokes, this.strokeGroups)

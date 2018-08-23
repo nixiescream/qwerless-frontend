@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     API_URL: 'http://localhost:3000/api',
-    DOMAIN_NAME: 'http://localhost:80',
+    DOMAIN_NAME: 'http://localhost:8080',
     CLOUDINARY_URL: 'https://api.cloudinary.com/v1_1/qwerless/image/upload',
     CLOUDINARY_UPLOAD_PRESET: 'n8cl7xab',
     CLOUDINADY_IMAGE: 'https://res.cloudinary.com/qwerless/image/upload/v1534788909/'

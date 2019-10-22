@@ -10,7 +10,7 @@ import { NotesService } from '../../services/notes.service';
 })
 export class CreateNoteComponent implements OnInit {
 
-    @ViewChild("tref", {read: ElementRef}) domEditor: ElementRef;
+    @ViewChild("tref", {static: true, read: ElementRef}) domEditor: ElementRef;
     editor;
 
     constructor(private elementRef: ElementRef, private notesService: NotesService, private router: Router) { }

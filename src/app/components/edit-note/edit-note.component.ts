@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
 })
 export class EditNoteComponent implements OnInit {
 
-    @ViewChild("tref", {read: ElementRef}) domEditor: ElementRef;
+    @ViewChild("tref", {static: true, read: ElementRef}) domEditor: ElementRef;
     editor;
 
     DOMAIN_NAME = environment.DOMAIN_NAME;
